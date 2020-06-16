@@ -1,0 +1,5 @@
+project: pkg.voms/v0120.01
+repo: voms
+platforms:
+  - centos6
+  - centos7
