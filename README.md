@@ -1,2 +1,3 @@
-# release.indigo-iam
-Configuration for the INDIGO IAM package releases
+# release.voms 
+
+Configuration for the VOMS package releases
