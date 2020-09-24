@@ -1,4 +1,4 @@
-project: pkg.voms/v0120.01
+project: pkg.voms/v0920.01
 repo: voms
 platforms:
   - centos6
