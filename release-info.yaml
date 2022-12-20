@@ -1,4 +1,5 @@
-project: pkg.voms/v0421.01
+project: pkg.voms/centos9
 repo: voms
 platforms:
   - centos7
+  - centos9
