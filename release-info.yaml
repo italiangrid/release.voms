@@ -1,4 +1,4 @@
-project: pkg.voms/voms-124
+project: pkg.voms/voms-develop
 repo: voms
 platforms:
   - centos7
