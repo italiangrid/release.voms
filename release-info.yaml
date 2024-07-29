@@ -1,5 +1,5 @@
-project: pkg.voms/voms-develop
+project: spkg.voms/main
 repo: voms
 platforms:
-  - centos7
-  - centos9
+  - almalinux8java8
+  - almalinux9java8
