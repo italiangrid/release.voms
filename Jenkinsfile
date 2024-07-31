@@ -14,7 +14,7 @@ def platform2Repo = [
 def buildRepoName(repo, platform) {
 
   def repoName
-  if (platform ==~ /^centos\d+/) {
+  if (platform ==~ /^centos\d+.*/) {
     repoName = "${repo}-rpm-${env.BRANCH_NAME}"
   } else if (platform ==~ /^almalinux\d+.*/) {
     repoName = "${repo}-rpm-${env.BRANCH_NAME}"
@@ -33,7 +33,7 @@ def removePackages(repo, platform, platform2Repo) {
   }
   echo "platformRepo = $platformRepo"
 
-  if (platform ==~ /^centos\d+/) {
+  if (platform ==~ /^centos\d+.*/) {
     sh 'nexus-assets-remove -u $NEXUS_CRED_USR -p $NEXUS_CRED_PSW -H $NEXUS_HOST -r ' + repo + ' -q ' + platformRepo
   } else if (platform ==~ /^almalinux\d+.*/) {
     sh 'nexus-assets-remove -u $NEXUS_CRED_USR -p $NEXUS_CRED_PSW -H $NEXUS_HOST -r ' + repo + ' -q ' + platformRepo
