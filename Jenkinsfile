@@ -1,6 +1,8 @@
 #!/usr/bin/env groovy
 
 def platform2Repo = [
+  // CentOS 7
+  "centos7java8": "centos7",
   // RedHat 8
   "almalinux8java8": "redhat8",
   // RedHat 9
@@ -12,7 +14,9 @@ def platform2Repo = [
 def buildRepoName(repo, platform) {
 
   def repoName
-  if (platform ==~ /^almalinux\d+.*/) {
+  if (platform ==~ /^centos\d+/) {
+    return "${repo}-rpm-${env.BRANCH_NAME}"
+  } else if (platform ==~ /^almalinux\d+.*/) {
     repoName = "${repo}-rpm-${env.BRANCH_NAME}"
   } else {
     error("Unsupported platform: ${platform}")
@@ -29,7 +33,9 @@ def removePackages(repo, platform, platform2Repo) {
   }
   echo "platformRepo = $platformRepo"
 
-  if (platform ==~ /^almalinux\d+.*/) {
+  if (platform ==~ /^centos\d+/) {
+    sh 'nexus-assets-remove -u $NEXUS_CRED_USR -p $NEXUS_CRED_PSW -H $NEXUS_HOST -r ' + repo + ' -q ' + platformRepo
+  } else if (platform ==~ /^almalinux\d+.*/) {
     sh 'nexus-assets-remove -u $NEXUS_CRED_USR -p $NEXUS_CRED_PSW -H $NEXUS_HOST -r ' + repo + ' -q ' + platformRepo
   } else {
     error("Unsupported platform: $platform")
@@ -44,7 +50,9 @@ def publish(repo, platform, platform2Repo) {
   }
   echo "platformRepo = $platformRepo"
 
-  if (platform ==~ /^almalinux\d+.*/) {
+  if (platform ==~ /^centos\d+.*/) {
+    sh 'nexus-assets-flat-upload -u $NEXUS_CRED_USR -p $NEXUS_CRED_PSW -H $NEXUS_HOST -r ' + repo + '/' + platformRepo + ' -d artifacts/packages/' + platform + '/RPMS'
+  } else if (platform ==~ /^almalinux\d+.*/) {
     sh 'nexus-assets-flat-upload -u $NEXUS_CRED_USR -p $NEXUS_CRED_PSW -H $NEXUS_HOST -r ' + repo + '/' + platformRepo + ' -d artifacts/packages/' + platform + '/RPMS'
   } else {
     error("Unsupported platform: $platform")
