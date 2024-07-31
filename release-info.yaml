@@ -1,5 +1,6 @@
 project: spkg.voms/main
 repo: voms
 platforms:
+  - centos7java8
   - almalinux8java8
   - almalinux9java8
