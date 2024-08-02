@@ -1,4 +1,4 @@
-project: spkg.voms/main
+project: spkg.voms/voms-clients-fix
 repo: voms
 platforms:
   - centos7java8
