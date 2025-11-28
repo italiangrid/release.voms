@@ -135,10 +135,6 @@ pipeline {
 
     stage('publish packages (beta)') {
 
-      environment {
-        CLEANUP_REPO = "y"
-      }
-
       when {
         branch 'beta'
       }
